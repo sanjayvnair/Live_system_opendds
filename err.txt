@@ -1,0 +1,9 @@
+.obj/DataReaderListenerImpl.o: In function `DataReaderListenerImpl::on_data_available(DDS::DataReader*)':
+/home/sanjayvnair/Sanjay/CHREC/OpenDDS-3.9/DevGuideExamples/DCPS/Live_system/DataReaderListenerImpl.cpp:47: multiple definition of `DataReaderListenerImpl::on_data_available(DDS::DataReader*)'
+.obj/livesystem.o:/home/sanjayvnair/Sanjay/CHREC/OpenDDS-3.9/DevGuideExamples/DCPS/Live_system/livesystem.cpp:130: first defined here
+.obj/DataReaderListenerImpl.o: In function `ACE_Atomic_Op_Ex<ACE_Null_Mutex, long>::operator--()':
+/home/sanjayvnair/Sanjay/CHREC/OpenDDS-3.9/DevGuideExamples/DCPS/Live_system/DataReaderListenerImpl.h:36: multiple definition of `virtual thunk to DataReaderListenerImpl::on_data_available(DDS::DataReader*)'
+.obj/livesystem.o:/home/sanjayvnair/Sanjay/CHREC/OpenDDS-3.9/DevGuideExamples/DCPS/Live_system/DataReaderListenerImpl.h:36: first defined here
+collect2: error: ld returned 1 exit status
+make[1]: *** [livesystem] Error 1
+make: *** [LiveSystem_LiveSystem] Error 2

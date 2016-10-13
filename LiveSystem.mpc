@@ -1,0 +1,64 @@
+//
+// file LiveSystem.mpc
+//
+
+project(*Common) : dcps {
+  sharedname = LiveSystemCommon
+  libout = .
+  includes += $(TAO_ROOT)/orbsvcs
+  idlflags += -I$(TAO_ROOT)/orbsvcs
+  idlflags += -Wb,export_macro=LiveSystemCommon_Export
+  idlflags += -Wb,export_include=LiveSystemCommon_Export.h
+  dcps_ts_flags += --export=LiveSystemCommon_Export
+  dynamicflags = LIVESYSTEMCOMMON_BUILD_DLL
+
+  TypeSupport_Files {
+    LiveSystem.idl
+  }
+
+
+  IDL_Files {
+    LiveSystemTypeSupport.idl
+    LiveSystem.idl
+  }
+
+
+  Header_Files {
+    LiveSystemTypeSupportImpl.h
+  }
+
+  Source_Files {
+    LiveSystemTypeSupportImpl.cpp
+  }
+} 
+
+project(*liveSystem) : dcpsexe, svc_utils {
+  after += *Common
+  exename   = livesystem
+
+  includes += $(TAO_ROOT)/orbsvcs
+  libs += LiveSystemCommon
+  dynamicflags = LIVESYSTEMCOMMON_HAS_DLL
+
+  TypeSupport_Files {
+    LiveSystem.idl
+  }
+
+  IDL_Files {
+    LiveSystemTypeSupport.idl
+    LiveSystem.idl
+  }
+
+  Header_Files {
+  }
+
+  Source_Files {
+    livesystem.cpp
+    DataReaderListenerImpl.cpp
+  }
+
+  Documentation_Files {
+    README.txt
+    domain_ids
+  }
+}

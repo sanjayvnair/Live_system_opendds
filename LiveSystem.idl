@@ -1,0 +1,18 @@
+#include "orbsvcs/TimeBase.idl"
+module LiveSystem
+{
+	
+#pragma DCPS_DATA_TYPE "LiveSystem::StringMsg"
+
+	struct StringMsg
+	{
+	   boolean type;
+	    long dr;
+	    long id;
+	    long cid;
+	    string msg;
+	};
+};
+
+
+
