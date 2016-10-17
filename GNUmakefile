@@ -8,7 +8,7 @@
 # this file will be lost the next time it is generated.
 #
 # MPC Command:
-# /home/sanjayvnair/Sanjay/CHREC/OpenDDS-3.9/ACE_wrappers/bin/mwc.pl -type gnuace LiveSystem.mwc
+# /home/sanjayvnair/Sanjay/CHREC/OpenDDS-3.9/ACE_wrappers/bin/mwc.pl -type gnuace /home/sanjayvnair/Sanjay/CHREC/OpenDDS-3.9/DDS_TAOv2_all.mwc
 #
 #----------------------------------------------------------------------------
 
@@ -20,32 +20,42 @@ endif
 
 include $(ACE_ROOT)/include/makeinclude/macros.GNU
 
-all: LiveSystem_Common LiveSystem_LiveSystem
+all: Messenger_Idl Messenger_Publisher Messenger_Subscriber
 
-depend: LiveSystem_Common-depend LiveSystem_LiveSystem-depend
+depend: Messenger_Idl-depend Messenger_Publisher-depend Messenger_Subscriber-depend
 
 REMAINING_TARGETS := $(filter-out all depend,$(TARGETS_NESTED:.nested=)) $(CUSTOM_TARGETS)
 
 $(REMAINING_TARGETS):
-	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.LiveSystem_Common $(@)
-	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.LiveSystem_LiveSystem $(@)
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Idl $(@)
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Publisher $(@)
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Subscriber $(@)
 
-.PHONY: LiveSystem_Common
-LiveSystem_Common:
-	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.LiveSystem_Common all
+.PHONY: Messenger_Idl
+Messenger_Idl:
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Idl all
 
-.PHONY: LiveSystem_Common-depend
-LiveSystem_Common-depend:
-	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.LiveSystem_Common depend
+.PHONY: Messenger_Idl-depend
+Messenger_Idl-depend:
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Idl depend
 
-.PHONY: LiveSystem_LiveSystem
-LiveSystem_LiveSystem: LiveSystem_Common
-	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.LiveSystem_LiveSystem all
+.PHONY: Messenger_Publisher
+Messenger_Publisher: Messenger_Idl
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Publisher all
 
-.PHONY: LiveSystem_LiveSystem-depend
-LiveSystem_LiveSystem-depend:
-	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.LiveSystem_LiveSystem depend
+.PHONY: Messenger_Publisher-depend
+Messenger_Publisher-depend:
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Publisher depend
+
+.PHONY: Messenger_Subscriber
+Messenger_Subscriber: Messenger_Publisher
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Subscriber all
+
+.PHONY: Messenger_Subscriber-depend
+Messenger_Subscriber-depend:
+	$(KEEP_GOING)@$(MAKE) -f GNUmakefile.Messenger_Subscriber depend
 
 project_name_list:
-	@echo LiveSystem_Common
-	@echo LiveSystem_LiveSystem
+	@echo Messenger_Idl
+	@echo Messenger_Publisher
+	@echo Messenger_Subscriber
